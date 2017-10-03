@@ -1,15 +1,21 @@
 const express = require('express');
-
 const app = express();
+
+const indexRoutes = require('./controllers/index');
+const infoRoutes = require('./controllers/info');
+
+const path = require('path');
 
 const port = 3000;
 
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.get('/', (req: any, res: any) => {
-    res.render('index', {greeting: 'Hello world!'});
-});
+app.use(express.static('public'));
+
+app.use('/', indexRoutes);
+app.use('/server-info', infoRoutes);
 
 app.listen(port, () => {
-    console.log('Listening on port ' + port);
+    console.log(`Listening on port ${port}`);
 });
