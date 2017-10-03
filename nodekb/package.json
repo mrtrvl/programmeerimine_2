@@ -1,11 +1,11 @@
 {
   "name": "nodekb",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build:live",
-    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./index.ts"
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./app.ts"
   },
   "author": "",
   "license": "ISC",
@@ -16,5 +16,8 @@
     "nodemon": "^1.12.1",
     "ts-node": "^3.3.0",
     "typescript": "^2.5.3"
+  },
+  "dependencies": {
+    "express": "^4.16.1"
   }
 }
