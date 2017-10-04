@@ -10,6 +10,11 @@
             <div class="container">
                 <h1>Articles</h1>
             </div>
+            <ul>
+                <% for (var i in articles) { %>
+                    <li><%= articles[i].title %></li>
+                <% } %>
+              </ul>
         </main>
         <footer class="bg-light">
             <% include ../partials/footer %>
