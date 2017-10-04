@@ -9,7 +9,7 @@ router.get('/', (req: any, res: any) => {
     let info: any = {};
 
     // Serveri protsessori(te) / tuumade info
-    let cpus = os.cpus();
+    let cpus: any = os.cpus();
     let cpusToClient: any[] = [];
     cpus.forEach((cpu: any, idx: any) => {
         let newCpu: any = {
@@ -21,17 +21,17 @@ router.get('/', (req: any, res: any) => {
     info.cpus = cpusToClient;
 
     // OS
-    let uptime = os.uptime();
-    let days = Math.floor(uptime / 86400);
+    let uptime: number = os.uptime();
+    let days: number = Math.floor(uptime / 86400);
     uptime -= days * 86400;
 
-    let hours = Math.floor(uptime / 3600) % 24;
+    let hours: number = Math.floor(uptime / 3600) % 24;
     uptime -= hours * 3600;
 
-    let minutes = Math.floor(uptime / 60) % 60;
+    let minutes: number = Math.floor(uptime / 60) % 60;
     uptime -= minutes * 60;
 
-    let seconds = Math.floor(uptime % 60);
+    let seconds: number = Math.floor(uptime % 60);
     
     info.uptime = {
         days: days,
@@ -40,7 +40,7 @@ router.get('/', (req: any, res: any) => {
         seconds: seconds
     }
 
-    let serverOs = {
+    let serverOs: any = {
         platform: os.platform(),
         arch: os.arch()
     }
