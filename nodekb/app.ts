@@ -3,6 +3,7 @@ const app = express();
 
 const indexRoutes = require('./controllers/index');
 const infoRoutes = require('./controllers/info');
+const articlesRoutes = require('./controllers/articles');
 
 const path = require('path');
 
@@ -15,6 +16,7 @@ app.use(express.static('public'));
 
 app.use('/', indexRoutes);
 app.use('/server-info', infoRoutes);
+app.use('/articles', articlesRoutes);
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
