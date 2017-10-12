@@ -14,7 +14,8 @@ router.get('/posts', (req: any, res: any) => {
             console.log(err);
         } else {
             res.locals.posts = posts;
-            console.log(posts);
+            //console.log(posts);
+            //res.json(posts);
             res.render('pages/posts')
         }
     });
