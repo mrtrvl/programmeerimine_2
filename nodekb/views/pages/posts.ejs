@@ -9,12 +9,14 @@
         <main>
             <div class="container">
                 <h1>Posts</h1>
+                <a href="/posts/add" class="button">Add post</a>
                 <% posts.forEach(function(post) { %>
                 <div class='card'>
                     <div class='card-body'>
                         <h2 class='card-title'> <%= post.title %> </h3>
                         <div> <%= post.author %> | <%= post.createdAt %> </div>
                         <p> <%= post.content %> </p>
+                        <p> <%= post._id %> </p>
                     </div>
                 </div>
                 <% }); %>
