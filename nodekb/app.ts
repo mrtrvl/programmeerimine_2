@@ -1,7 +1,6 @@
-//import * as express from "express";
-const express = require('express');
+import * as express from 'express';
 const app = express();
-const mongoose = require('mongoose');
+import mongoose = require('mongoose');
 
 const indexRoutes = require('./controllers/index');
 const infoRoutes = require('./controllers/info');
