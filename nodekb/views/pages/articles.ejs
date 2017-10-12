@@ -12,7 +12,8 @@
             </div>
             <ul>
                 <% for (var i in articles) { %>
-                    <li><%= articles[i].title %></li>
+                    <li><%= articles[i].title %> Author: <%= articles[i].author %></li>
+                    <p><%= articles[i].body %></p>
                 <% } %>
               </ul>
         </main>
