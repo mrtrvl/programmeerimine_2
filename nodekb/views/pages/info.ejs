@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<% include ../partials/head %>
+
+    <body>
+        <header>
+            <% include ../partials/header %>
+        </header>
+
+        <main>
+            <div class="container">
+                <h1>Server Info</h1>
+                <hr>
+                <h3>CPU</h3>
+                <div data-children=".item" id="cpuAccordion">
+                    <div class="item">
+                        <a data-toggle="collapse" data-parent="#cpuAccordion" href="#cpuAccordion1" aria-expanded="false">
+                            <%= info.cpus[0].model %> - <%=info.cpus.length %> cores
+                        </a>
+                        <div id="cpuAccordion1" class="collapse" role="tabpanel">
+                            <p class="mb-3">
+                                <% info.cpus.forEach(function(cpu) { %>
+                                    <span><%= cpu.model %></span><br>
+                                <% }); %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <hr>
+
+                <h3>Uptime</h3>
+                <p>
+                    <%= info.uptime.days %> days, <%= info.uptime.hours %> hours, <%= info.uptime.minutes %> minuts, <%= info.uptime.seconds %> seconds.
+                </p>
+
+                <hr>
+
+                <h3>Operating System</h3>
+                <%= info.os.platform %> - <%= info.os.arch %>
+
+                <hr>
+                
+                <h3>Memory</h3>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: <%= Math.floor(info.memory.percentage) %>%;" aria-valuenow="<%= info.memory.percentage %>" aria-valuemin="0" aria-valuemax="100"><%= Math.floor(info.memory.percentage) %>%</div>
+                </div>
+                <span style="float: right;"> <%= info.memory.used %> / <%= info.memory.total %> </span>
+            </div>
+        </main>
+        <footer class="bg-light">
+            <% include ../partials/footer %>
+        </footer>
+    </body>
+
+</html>

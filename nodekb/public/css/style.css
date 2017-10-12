@@ -1,0 +1,16 @@
+ines (14 sloc)  197 Bytes
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    margin-bottom: 60px;
+}
+
+footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    height: 60px;
+    line-height: 60px;
+}
