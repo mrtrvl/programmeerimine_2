@@ -8,11 +8,12 @@
 
         <main>
             <div class="container">
-                        <h1> <%= post.title %> </h1>
-                        <div> <%= post.author %> | <%= post.createdAt %> </div>
-                        <p> <%= post.content %> </p>
-                        <hr>
-                        <a href="/post/<%= post._id %>/edit" class="btn btn-primary">Edit</a>
+                <h1> <%= post.title %> </h1>
+                <div> <%= post.author %> | <%= post.createdAt %> </div>
+                <p> <%= post.content %> </p>
+                <hr>
+                <a href="/post/<%= post._id %>/edit" class="btn btn-primary">Edit</a>
+                <a href="/post/<%= post._id %>/delete" class="btn btn-primary">Delete</a>
             </div>
         </main>
         <footer class="bg-light">
