@@ -28,10 +28,12 @@ router.get('/posts', (req: any, res: any) => {
     });
 });
 
+// Postituse lisamise vaade
 router.get('/posts/add', (req: any, res: any) => {
     res.render('pages/add-post')
 });
 
+//Postituse lisamine
 router.post('/posts/add', (req: any, res: any) => {
     console.log(req.body);
     let newPost = new Post ({
@@ -43,9 +45,37 @@ router.post('/posts/add', (req: any, res: any) => {
     newPost.save((err: any) => {
         if (err) {
             console.log(err);
-            res.redirect('/posts');
+            res.redirect('/posts/add');
         } else {
             res.redirect('/posts');
+        }
+    });
+});
+
+// Üksiku postituse vaade
+router.get('/post/:id', (req: any, res: any) => {
+    let postId = req.params.id;
+    Post.findOne({_id: postId}).exec((err: any, post: any) => {
+        if (err) {
+            console.log(err);
+            res.redirect('/posts');
+        } else {
+            res.locals.post = post;
+            res.render('pages/single-post');
+        }
+    });
+});
+
+// Üksiku postituse kustutamine
+router.get('/post/:id/delete', (req: any, res: any) => {
+    let postId = req.params.id;
+    Post.findOne({_id: postId}).exec((err: any, post: any) => {
+        if (err) {
+            console.log(err);
+            res.redirect('/posts');
+        } else {
+            res.locals.post = post;
+            res.render('pages/single-post');
         }
     });
 });
