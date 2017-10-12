@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+let express = require('express');
+let router = express.Router();
 
 router.get('/', (req: any, res: any) => {
     res.render('pages/index');

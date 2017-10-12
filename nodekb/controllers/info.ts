@@ -1,6 +1,6 @@
-const express = require('express');
-const router = express.Router();
-const os = require('os');
+let express = require('express');
+let router = express.Router();
+let os = require('os');
 
 // https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript#answer-18650828
 function formatBytes(a : any, b?: any){if(0==a)return"0 Bytes";var c=1024,d=b||2,e=["Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"],f=Math.floor(Math.log(a)/Math.log(c));return parseFloat((a/Math.pow(c,f)).toFixed(d))+" "+e[f]}
