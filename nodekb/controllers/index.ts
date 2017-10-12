@@ -66,6 +66,42 @@ router.get('/post/:id', (req: any, res: any) => {
     });
 });
 
+// Postituse muutmise vaade
+router.get('/post/:id/edit', (req: any, res: any) => {
+    let postId = req.params.id;
+    Post.findOne({_id: postId}).exec((err: any, post: any) => {
+        if (err) {
+            console.log(err);
+            res.redirect('/posts');
+        } else {
+            res.locals.post = post;
+            res.render('pages/edit-post');
+        }
+    });
+});
+
+//Postituse muutmine
+router.post('/post/:id/edit', (req: any, res: any) => {
+    console.log(req.body);
+    let post = {
+        title: req.body.title,
+        author: req.body.author,
+        content: req.body.content
+    };
+
+    let query = {_id: req.params.id};
+    Post.update(query, post, (err:any) => {
+        if (err) {
+            console.log(err);
+            res.redirect('/post/' + req.params.id + "/edit");
+        } else {
+            res.redirect('/post/' + req.params.id);
+        }  
+    });
+});
+
+
+
 // Üksiku postituse kustutamine
 router.get('/post/:id/delete', (req: any, res: any) => {
     let postId = req.params.id;

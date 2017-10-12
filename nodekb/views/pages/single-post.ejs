@@ -8,15 +8,11 @@
 
         <main>
             <div class="container">
-                <h1>Posts</h1>
-                <div class='card'>
-                    <div class='card-body'>
-                        <h2 class='card-title'> <%= post.title %> </h3>
+                        <h1> <%= post.title %> </h1>
                         <div> <%= post.author %> | <%= post.createdAt %> </div>
                         <p> <%= post.content %> </p>
-                        <p> <%= post._id %> </p>
-                    </div>
-                </div>
+                        <hr>
+                        <a href="/post/<%= post._id %>/edit" class="btn btn-primary">Edit</a>
             </div>
         </main>
         <footer class="bg-light">
