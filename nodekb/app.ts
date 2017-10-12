@@ -1,10 +1,17 @@
 //import * as express from "express";
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
 
 const indexRoutes = require('./controllers/index');
 const infoRoutes = require('./controllers/info');
 const articlesRoutes = require('./controllers/articles');
+
+mongoose.connect('mongodb://localhost/prog2');
+let db: any = mongoose.connection;
+db.once('open', function() {
+    console.log('Connected to database');
+});
 
 const path = require('path');
 

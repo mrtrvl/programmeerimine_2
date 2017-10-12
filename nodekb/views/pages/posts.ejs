@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <% include ../partials/head %>
+    <body>
+        <header>
+            <% include ../partials/header %>
+        </header>
+
+        <main>
+            <div class="container">
+                <h1>Posts</h1>
+            </div>
+            <% posts.forEach(function(post) { %>
+                <h3> <%= post.title %> </h3>
+            <% }); %>
+            <ul>
+                <% for (var i in posts) { %>
+                    <li><%= posts[i].title %> Author: <%= posts[i].author %></li>
+                    <p><%= posts[i].content %></p>
+                    <p><%= posts[i].createdAt %></p>
+                <% } %>
+              </ul>
+        </main>
+        <footer class="bg-light">
+            <% include ../partials/footer %>
+        </footer>
+    </body>
+</html>
