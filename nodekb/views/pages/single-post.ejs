@@ -13,7 +13,7 @@
                 <p> <%= post.content %> </p>
                 <hr>
                 <a href="/post/<%= post._id %>/edit" class="btn btn-primary">Edit</a>
-                <a href="/post/<%= post._id %>/delete" class="btn btn-primary">Delete</a>
+                <a href="#" class="btn btn-danger delete-post" post-id=<%= post._id %>>Delete</a>
             </div>
         </main>
         <footer class="bg-light">

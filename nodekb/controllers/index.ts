@@ -100,14 +100,14 @@ router.post('/post/:id/edit', (req: any, res: any) => {
 
 
 // Üksiku postituse kustutamine
-router.get('/post/:id/delete', (req: any, res: any) => {
+router.delete('/post/:id', (req: any, res: any) => {
     let postId = req.params.id;
     Post.findByIdAndRemove({_id: postId}, (err: any) => {
         if (err) {
             console.log(err);
             res.redirect('/error');
         } else {
-            res.redirect('/posts');
+            res.send('Success');
         }
     });
 });
