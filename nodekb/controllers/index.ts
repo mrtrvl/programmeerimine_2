@@ -90,9 +90,9 @@ router.post('/post/:id/edit', (req: any, res: any) => {
     Post.update(query, post, (err:any) => {
         if (err) {
             console.log(err);
-            res.redirect('/post/' + req.params.id + '/edit');
+            res.redirect('/posts');
         } else {
-            res.redirect('/post/' + req.params.id);
+            res.redirect('/posts');
         }  
     });
 });
