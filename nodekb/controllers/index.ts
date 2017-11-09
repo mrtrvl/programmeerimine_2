@@ -2,6 +2,7 @@ import * as express from 'express';
 const router = express.Router();
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
 
 
 // parse application/x-www-form-urlencoded 
@@ -21,6 +22,14 @@ router.get('/', (req: any, res: any) => {
 router.get('/login', (req: any, res: any) => {
     res.render('pages/login');
 });
+
+router.post('/login', (req:any, res:any, next:any) => {
+    passport.authenticate('local', {
+        succesRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: true
+    })(req, res, next);
+})
 
 // Kasutaja registreerimine
 router.get('/register', (req: any, res: any) => {
