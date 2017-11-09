@@ -1,6 +1,8 @@
 import * as express from 'express';
 const router = express.Router();
-let bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+const bcrypt = require('bcryptjs');
+
 
 // parse application/x-www-form-urlencoded 
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -9,9 +11,48 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
 const Post = require('../models/post');
+const User = require('../models/user');
 
 router.get('/', (req: any, res: any) => {
     res.render('pages/index');
+});
+
+// login
+router.get('/login', (req: any, res: any) => {
+    res.render('pages/login');
+});
+
+// Kasutaja registreerimine
+router.get('/register', (req: any, res: any) => {
+    res.render('pages/register');
+});
+
+router.post('/register', (req: any, res: any) => {
+    let email = req.body.username;
+    let password = req.body.password;
+    let password2 = req.body.password2;
+
+    let newUser = new User ({
+        email: email,
+        password: password
+    });
+
+    bcrypt.genSalt(10, (err: any, salt: any) => {
+        bcrypt.hash(newUser.password, salt, (err: any, hash: any) => {
+            if(err) {
+                console.log(err);
+                return res.redirect('/register');
+            }
+            newUser.password = hash;
+            newUser.save((err: any)=> {
+                if (err) {
+                    console.log(err);
+                    return res.render('/register');
+                }
+                return res.redirect('/login');
+            });
+        });
+    });
 });
 
 // Kõik postitused
@@ -63,6 +104,8 @@ router.get('/post/:id', (req: any, res: any) => {
         }
     });
 });
+
+
 
 // Postituse muutmise vaade
 router.get('/post/:id/edit', (req: any, res: any) => {
