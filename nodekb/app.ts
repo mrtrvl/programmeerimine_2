@@ -21,8 +21,16 @@ const path = require('path');
 app.use(session({
     secret: 'session secret',
     resave: true,
-    saveUnitialized: true
+    saveUninitialized: true
 }));
+
+
+app.use(require('connect-flash')());
+app.use(function(req, res,next){
+   res.locals.messages = require('express-messages')(req,res);
+    next();
+});
+
 
 const port = 3000;
 

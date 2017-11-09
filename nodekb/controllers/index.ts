@@ -14,6 +14,15 @@ router.use(bodyParser.json());
 const Post = require('../models/post');
 const User = require('../models/user');
 
+const ensureAuthenticated = (req: any, res: any, next: any) => {
+    if(req.isAuthenticated()) {
+        return next();
+    } else {
+        req.flash('danger', 'Login!');
+        return res.redirect('/login');
+    }
+};
+
 router.get('/', (req: any, res: any) => {
     res.render('pages/index');
 });
@@ -25,15 +34,22 @@ router.get('/login', (req: any, res: any) => {
 
 router.post('/login', (req:any, res:any, next:any) => {
     passport.authenticate('local', {
-        succesRedirect: '/',
+        successRedirect: '/',
         failureRedirect: '/login',
         failureFlash: true
     })(req, res, next);
-})
+});
 
 // Kasutaja registreerimine
 router.get('/register', (req: any, res: any) => {
     res.render('pages/register');
+});
+
+// logout
+router.get('/logout', (req: any, res: any) => {
+    req.logout();
+    req.flash('success', 'You are logged out');
+    return res.redirect('/');
 });
 
 router.post('/register', (req: any, res: any) => {
@@ -66,7 +82,7 @@ router.post('/register', (req: any, res: any) => {
 
 // Kõik postitused
 router.get('/posts', (req: any, res: any) => {
-    Post.find({}, (err: any, posts: any) => {
+    Post.find({}).populate('author').exec((err: any, posts: any) => {
         if(err) {
             console.log(err);
             res.redirect('/error')
@@ -78,7 +94,7 @@ router.get('/posts', (req: any, res: any) => {
 });
 
 // Postituse lisamise vaade
-router.get('/posts/add', (req: any, res: any) => {
+router.get('/posts/add', ensureAuthenticated, (req: any, res: any) => {
     res.render('pages/add-post')
 });
 
@@ -86,7 +102,7 @@ router.get('/posts/add', (req: any, res: any) => {
 router.post('/posts/add', (req: any, res: any) => {
     let newPost = new Post ({
         title: req.body.title,
-        author: req.body.author,
+        author: req.user._id,
         content: req.body.content
     });
 
@@ -103,7 +119,7 @@ router.post('/posts/add', (req: any, res: any) => {
 // Üksiku postituse vaade
 router.get('/post/:id', (req: any, res: any) => {
     let postId = req.params.id;
-    Post.findOne({_id: postId}).exec((err: any, post: any) => {
+    Post.findOne({_id: postId}).populate('author').exec((err: any, post: any) => {
         if (err) {
             console.log(err);
             res.redirect('/error');
